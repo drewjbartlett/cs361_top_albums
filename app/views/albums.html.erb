@@ -70,6 +70,10 @@
         
       }
 
+      .album-list tbody tr.highlighted-row td {
+        background-color: red;
+      }
+
       .album-list tbody tr td {
         padding: 10px 0;
       }
@@ -82,53 +86,28 @@
 
         <form method="GET">
           <div class="input-group">
-            <input type="text" class="input" name="album-number">
+            <input type="text" class="input" name="highlightedIndex" value="<%= @highlightedIndex %>">
             <button type="submit" class="button">Highlight</button>
           </div>
         </form>
       </div>
-
-      <%= @albums %>
-
+      
       <table class="album-list">
         <thead>
           <tr>
-            <th>#</th>
-            <th>Name</th>
-            <th>Year</th>
+            <th><a href="?orderBy=index">#</a></th>
+            <th><a href="?orderBy=name">Name</a></th>
+            <th><a href="?orderBy=year">Year</a></th>
           </tr>
         </thead>
-
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>Album</td>
-            <td>1991</td>
-          </tr>
-          
-          <tr>
-            <td>1</td>
-            <td>Album</td>
-            <td>1991</td>
-          </tr>
-          
-          <tr>
-            <td>1</td>
-            <td>Album</td>
-            <td>1991</td>
-          </tr>
-          
-          <tr>
-            <td>1</td>
-            <td>Album</td>
-            <td>1991</td>
-          </tr>
-          
-          <tr>
-            <td>1</td>
-            <td>Album</td>
-            <td>1991</td>
-          </tr>
+          <% @albums.each_with_index do |album, index| %>
+            <tr class="<%= @highlightedIndex == (index + 1).to_i ? 'highlighted-row' : '' %>">
+              <td><%= (index + 1) %></td>
+              <td><%= album[:name] %></td>
+              <td><%= album[:year] %></td>
+            </tr>
+          <% end %>
         </tbody>
       </table>
     </div>

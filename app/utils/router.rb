@@ -13,17 +13,17 @@ class Router
   end
 
   def dispatch(request)
-    path = request.fetch('PATH_INFO')
+    path = request.env.fetch('PATH_INFO')
     
     if (@routes.has_key?(path))
       route = @routes.fetch(path)
-      self.callFromController(route[:handler], request)
+      self.callControllerMethod(route[:handler], request)
     else
       self.response(404, "<h1>#{path} not found</h1>")  
     end
   end
 
-  def callFromController(controllerPath, request)
+  def callControllerMethod(controllerPath, request)
     controllerName, methodName = controllerPath.split('@')
     controller = Object.const_get(controllerName)
     controller = controller.new(request)

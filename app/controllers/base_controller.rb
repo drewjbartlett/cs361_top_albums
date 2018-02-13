@@ -13,7 +13,7 @@ class  BaseController
     if File.exists?(file_path)
       self.response(200, renderFile(file_path))
     else
-      "ERROR: no available template file #{file_path}"
+      self.response(404, "#{file_path} not found")
     end
   end
 

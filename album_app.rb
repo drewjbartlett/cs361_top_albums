@@ -5,7 +5,7 @@ class AlbumApp
   end
 
   def call(env)
-    @router.dispatch(env)
+    @router.dispatch(Rack::Request.new(env))
   end
 
 end
