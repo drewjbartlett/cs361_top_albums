@@ -86,7 +86,7 @@
 
         <form method="GET">
           <div class="input-group">
-            <input type="text" class="input" name="highlightedIndex" value="<%= @highlightedIndex %>">
+            <input type="text" class="input" name="highlighted_index" value="<%= @highlighted_index == 0 ? '' : @highlighted_index %>">
             <button type="submit" class="button">Highlight</button>
           </div>
         </form>
@@ -95,14 +95,14 @@
       <table class="album-list">
         <thead>
           <tr>
-            <th><a href="?orderBy=index">#</a></th>
-            <th><a href="?orderBy=name">Name</a></th>
-            <th><a href="?orderBy=year">Year</a></th>
+            <th><a href="?order_by=index">#</a></th>
+            <th><a href="?order_by=name">Name</a></th>
+            <th><a href="?order_by=year">Year</a></th>
           </tr>
         </thead>
         <tbody>
           <% @albums.each_with_index do |album, index| %>
-            <tr class="<%= @highlightedIndex == (index + 1).to_i ? 'highlighted-row' : '' %>">
+            <tr class="<%= @highlighted_index == (index + 1).to_i ? 'highlighted-row' : '' %>">
               <td><%= (index + 1) %></td>
               <td><%= album[:name] %></td>
               <td><%= album[:year] %></td>

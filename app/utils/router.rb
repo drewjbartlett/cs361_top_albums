@@ -1,6 +1,7 @@
-require_relative '../controllers/album_controller'
+require_relative 'paths'
 
 class Router
+  include Paths
 
   def initialize()
     @routes = Hash.new
@@ -17,18 +18,25 @@ class Router
     
     if (@routes.has_key?(path))
       route = @routes.fetch(path)
-      self.callControllerMethod(route[:handler], request)
+      call_controller_method(route[:handler], request)
     else
-      self.response(404, "<h1>#{path} not found</h1>")  
+      response(404, "<h1>#{path} not found</h1>")  
     end
   end
 
-  def callControllerMethod(controllerPath, request)
+  def call_controller_method(controllerPath, request)
     controllerName, methodName = controllerPath.split('@')
+
+    load_controller(controllerName)
+    
     controller = Object.const_get(controllerName)
     controller = controller.new(request)
 
     controller.send(methodName)
+  end
+
+  def load_controller(controllerName)
+    require_relative controllers_path('album_controller')
   end
 
 end

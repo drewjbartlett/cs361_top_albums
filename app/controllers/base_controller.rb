@@ -1,6 +1,9 @@
 require 'erb'
+require_relative '../utils/paths'
 
 class  BaseController
+  include Paths
+
   def initialize(request)
     @request = request
   end
@@ -8,20 +11,16 @@ class  BaseController
   def render(name, data = {})
     template_file = "#{name}.html.erb"
 
-    file_path = prependTemplatesPath(template_file)
+    file_path = views_path(template_file)
 
     if File.exists?(file_path)
-      self.response(200, renderFile(file_path))
+      response(200, render_file(file_path))
     else
-      self.response(404, "#{file_path} not found")
+      response(404, "#{file_path} not found")
     end
   end
 
-  def prependTemplatesPath(file_name)
-    File.expand_path(File.join("../../views", file_name), __FILE__)
-  end
-
-  def renderFile(file_path)
+  def render_file(file_path)
     raw = File.read(file_path)
     ERB.new(raw).result(binding)
   end
