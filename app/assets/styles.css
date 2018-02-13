@@ -1,0 +1,70 @@
+body, html {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: overflow;
+  font-size: 14px;
+  font-family: arial;
+}
+
+.album-app {
+  background: #efefef;
+  margin: 50px;
+  padding: 25px 50px;
+  width: 650px;
+}
+
+.album-filters {
+  margin: 0 0 20px 0;
+}
+
+.input-group {
+  display: flex;
+}
+
+.input,
+.button {
+  font-size: 1em;
+  padding: 5px;
+  flex: 1;
+  outline: none;
+}
+
+.input {
+  min-width: 75%;
+  border: solid 1px #ccc;
+  border-right: 0;
+}
+
+.input:focus {
+  border-color: blue;
+}
+
+.button {
+  background: blue;
+  color: #fff;
+  border: 0;
+}
+
+.album-list {
+  text-align: left;
+  width: 100%;
+}
+
+.album-list thead {
+  
+}
+
+.album-list tbody {
+  
+}
+
+.album-list tbody tr {
+  
+}
+
+.album-list tbody tr td {
+  padding: 10px 0;
+}

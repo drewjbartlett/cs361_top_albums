@@ -1,0 +1,136 @@
+<html>
+  <head>
+    <title>Top 100 Albums</title>
+    <!-- <link rel="stylesheet" type="text/css" href="/assets/styles.css"> -->
+    <style>
+      body, html {
+        padding: 0;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: overflow;
+        font-size: 14px;
+        font-family: arial;
+      }
+
+      .album-app {
+        background: #efefef;
+        margin: 50px;
+        padding: 25px 50px;
+        width: 650px;
+      }
+
+      .album-filters {
+        margin: 0 0 20px 0;
+      }
+
+      .input-group {
+        display: flex;
+      }
+
+      .input,
+      .button {
+        font-size: 1em;
+        padding: 5px;
+        flex: 1;
+        outline: none;
+      }
+
+      .input {
+        min-width: 75%;
+        border: solid 1px #ccc;
+        border-right: 0;
+      }
+
+      .input:focus {
+        border-color: blue;
+      }
+
+      .button {
+        background: blue;
+        color: #fff;
+        border: 0;
+      }
+
+      .album-list {
+        text-align: left;
+        width: 100%;
+      }
+
+      .album-list thead {
+        
+      }
+
+      .album-list tbody {
+        
+      }
+
+      .album-list tbody tr {
+        
+      }
+
+      .album-list tbody tr td {
+        padding: 10px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="album-app">
+      <div class="album-filters">
+        <h1>Sort By</h1>
+
+        <form method="GET">
+          <div class="input-group">
+            <input type="text" class="input" name="album-number">
+            <button type="submit" class="button">Highlight</button>
+          </div>
+        </form>
+      </div>
+
+      <%= @albums %>
+
+      <table class="album-list">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Year</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Album</td>
+            <td>1991</td>
+          </tr>
+          
+          <tr>
+            <td>1</td>
+            <td>Album</td>
+            <td>1991</td>
+          </tr>
+          
+          <tr>
+            <td>1</td>
+            <td>Album</td>
+            <td>1991</td>
+          </tr>
+          
+          <tr>
+            <td>1</td>
+            <td>Album</td>
+            <td>1991</td>
+          </tr>
+          
+          <tr>
+            <td>1</td>
+            <td>Album</td>
+            <td>1991</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>
