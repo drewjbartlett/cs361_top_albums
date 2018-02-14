@@ -18,6 +18,12 @@ class  BaseController
     end
   end
 
+  def render_partial(file_name)
+    file_path = views_path(get_file_name(file_name))
+
+    render_file(file_path)
+  end
+
   def get_file_name(file_name)
     "#{file_name}.html.erb"
   end

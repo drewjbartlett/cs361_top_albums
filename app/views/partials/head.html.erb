@@ -1,0 +1,88 @@
+<html>
+  <head>
+    <title>Top 100 Albums</title>
+    <!-- <link rel="stylesheet" type="text/css" href="/assets/styles.css"> -->
+    <style>
+      body, html {
+        background: #e6ebf1;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        font-size: 14px;
+        font-family: arial;
+      }
+
+      .album-app {
+        box-shadow: 0 7px 14px 0 rgba(50,50,93,.1), 0 3px 6px 0 rgba(0,0,0,.07);
+        margin: 50px;
+        padding: 25px 50px;
+        width: 650px;
+        border-radius: 4px;
+        background: #fff;
+      }
+
+      .album-app h1 {
+        color: #525f7f;
+      }
+
+      .album-filters {
+        margin: 0 0 20px 0;
+      }
+
+      .input-group {
+        display: flex;
+      }
+
+      .input,
+      .button {
+        font-size: 1em;
+        padding: 5px;
+        flex: 1;
+        outline: none;
+      }
+
+      .input {
+        min-width: 75%;
+        border: solid 1px #ccc;
+        border-right: 0;
+      }
+
+      .input:focus {
+        border-color: #5969e2;
+      }
+
+      .button {
+        background: #5969e2;
+        color: #fff;
+        border: 0;
+      }
+
+      .album-list {
+        border-spacing: 0;
+        text-align: left;
+        width: 100%;
+      }
+
+      .album-list thead th {
+        padding: 0 5px 5px;
+        border-bottom: solid 2px #000;
+      }
+
+      .album-list thead th a {
+        color: #000;
+        text-decoration: none;
+      }
+
+      .album-list tbody tr.highlighted-row td {
+        background-color: red;
+      }
+
+      .album-list tbody tr td {
+        padding: 10px 5px;
+      }
+    </style>
+  </head>
+  <body>
