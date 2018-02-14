@@ -8,9 +8,14 @@ class AlbumApp
     @albums = loadFromFile
 
     response_body << "<table>"
-
-    @albums.each {|row| response_body << "<tr><td>#{row.to_s}</tr></td>"}
-  	
+      response_body << "<thead><tr>"
+        response_body << "<th>Rank</th>"        
+        response_body << "<th>Name</th>"        
+        response_body << "<th>Year</th>"        
+      response_body << "</tr></thead>"
+      response_body << "<tbody>"
+        @albums.each {|row| response_body << "<tr><td>#{row.to_s}</td><td>#{row.to_s}</td><td>#{row.to_s}</td></tr>"}
+      response_body << "</tbody>"
     response_body << "</table>"
 
     # Send the response
