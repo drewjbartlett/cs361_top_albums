@@ -24,6 +24,7 @@ class BaseModel
     if (valid_sort_keys.include?(sort_key))
       data.sort_by {|row| 
         row = row[sort_key.to_sym]
+        # strip quotes from the row if it's not the number key
         sort_key != 'number' ? row.gsub("'", '') : row
       }
     else
