@@ -20,8 +20,7 @@ class Router
       route = @routes.fetch(path)
       call_controller_method(route[:handler], request)
     else
-      puts 'foo'
-      # response(404, "<h1>#{path} not found</h1>")  
+      call_controller_method('Error@index', request)
     end
   end
 
@@ -30,14 +29,14 @@ class Router
 
     load_controller(controllerName)
     
-    controller = Object.const_get(controllerName)
+    controller = Object.const_get("#{controllerName}Controller")
     controller = controller.new(request)
 
     controller.send(methodName)
   end
 
   def load_controller(controllerName)
-    require_relative controllers_path('album_controller')
+    require_relative controllers_path("#{controllerName.downcase}_controller")
   end
 
 end

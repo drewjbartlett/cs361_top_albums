@@ -86,42 +86,8 @@
     </style>
   </head>
   <body>
-    <div class="album-app">
-      <div class="album-filters">
-        <h1>Sort By</h1>
-
-        <form method="GET">
-          <div class="input-group">
-            <input
-              class="input"
-              name="highlighted_index"
-              maxlength="3"
-              type="text"
-              value="<%= @highlighted_index == 0 ? '' : @highlighted_index %>">
-
-            <button class="button" type="submit">Highlight</button>
-          </div>
-        </form>
-      </div>
-      
-      <table class="album-list">
-        <thead>
-          <tr>
-            <th><a href="?sort_by=number">#</a></th>
-            <th><a href="?sort_by=name">Name</a></th>
-            <th><a href="?sort_by=year">Year</a></th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @albums.each do |album| %>
-            <tr class="<%= @highlighted_index == album[:number].to_i ? 'highlighted-row' : '' %>">
-              <td><%= album[:number] %></td>
-              <td><%= album[:name] %></td>
-              <td><%= album[:year] %></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
+    <div class="error">
+      Error
     </div>
   </body>
 </html>

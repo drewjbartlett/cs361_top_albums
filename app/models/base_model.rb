@@ -12,10 +12,22 @@ class BaseModel
     data = []
 
     CSV.foreach(data_path(@file_name)) do |row|
-      data.push({ number: 1, name: row[0], year: row[1] })
+      data.push({ number: $., name: row[0], year: row[1] })
     end
 
-    # @data = @data.sort {|x,y| x[:name] <=> y[:name] }
     data
+  end
+
+  def sort_data_by(sort_key, data)
+    valid_sort_keys = ['name', 'number', 'year']
+
+    if (valid_sort_keys.include?(sort_key))
+      data.sort_by {|row| 
+        row = row[sort_key.to_sym]
+        sort_key != 'number' ? row.gsub("'", '') : row
+      }
+    else
+      data
+    end
   end
 end

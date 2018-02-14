@@ -8,16 +8,18 @@ class  BaseController
     @request = request
   end
 
-  def render(name, data = {})
-    template_file = "#{name}.html.erb"
-
-    file_path = views_path(template_file)
+  def render(file_name, response_code = 200)
+    file_path = views_path(get_file_name(file_name))
 
     if File.exists?(file_path)
-      response(200, render_file(file_path))
+      response(response_code, render_file(file_path))
     else
       response(404, "#{file_path} not found")
     end
+  end
+
+  def get_file_name(file_name)
+    "#{file_name}.html.erb"
   end
 
   def render_file(file_path)
