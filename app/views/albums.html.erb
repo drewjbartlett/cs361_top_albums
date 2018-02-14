@@ -2,7 +2,7 @@
 
 <div class="album-app">
   <div class="album-filters">
-    <h1>Sort By</h1>
+    <h1>Top 100 Albums of All Time</h1>
 
     <form method="GET">
       <div class="input-group">
@@ -24,8 +24,10 @@
       <% @headers.each do |header| %>
         <th>
           <a 
-            href="?sort_by=<%= header[:sort_key] %><%= @highlighted_index != 0 ? "&highlighted_index=#{@highlighted_index}" : '' %>"
-            class=""><%= header[:name] %></a>
+            href="<%= sort_by_link(header[:sort_key]) %>"
+            class="<%= @sorted_by == header[:sort_key] ? 'selected-header' : '' %>">
+            <%= header[:name] %>
+          </a>
         </th>
       <% end %>
       </tr>
