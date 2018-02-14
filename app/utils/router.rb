@@ -20,7 +20,7 @@ class Router
       route = @routes.fetch(path)
       call_controller_method(route[:handler], request)
     else
-      puts  request.env
+      puts 'foo'
       # response(404, "<h1>#{path} not found</h1>")  
     end
   end
