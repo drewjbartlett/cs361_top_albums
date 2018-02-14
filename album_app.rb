@@ -5,7 +5,10 @@ class AlbumApp
   def call(env)
     response_body = "<h1>Top 100 Albums of All Time</h1>"
     # Read the data from the file.
-    response_body << render_data_to_table(load_from_file)
+
+    table_data = load_from_file
+    #table_data = sort_data_by_key("title", table_data)
+    response_body << render_data_to_table(table_data)
 
     # Send the response
     [200, {'Content-Type' => 'text/html'}, [response_body.to_s]]
@@ -15,7 +18,7 @@ class AlbumApp
   	albums = []
 
   	CSV.foreach("top_100_albums.txt") do |row|
-  		albums.push({ number: 1, title: row[0], year: row[1] })
+  		albums.push({ number: $., title: row[0], year: row[1] })
 	   end
 
 	   albums
@@ -39,6 +42,12 @@ class AlbumApp
     response_body
 
   end
+
+  def sort_data_by_key(sort_key, data)
+    data.sort_by { |row| row[sort_key.to_sym] }
+
+  end
+
 
 
 end
