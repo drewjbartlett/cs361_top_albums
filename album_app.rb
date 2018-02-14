@@ -27,9 +27,9 @@ class AlbumApp
 
     response_body << "<table>"
       response_body << "<thead><tr>"
-        response_body << "<th>Rank</th>"        
-        response_body << "<th>Name</th>"        
-        response_body << "<th>Year</th>"        
+        response_body << '<th><a href="?sort_by=rank">Rank</a></th>'        
+        response_body << '<th><a href="?sort_by=name">Name</a></th>'        
+        response_body << '<th><a href="?sort_by=year">Year</a></th>'            
       response_body << "</tr></thead>"
       response_body << "<tbody>"
         table_data.each {|row| response_body << "<tr><td>#{row[:number]}</td><td>#{row[:title]}</td><td>#{row[:year]}</td></tr>"}
