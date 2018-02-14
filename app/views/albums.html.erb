@@ -21,10 +21,10 @@
   <table class="album-list">
     <thead>
       <tr>
-      <% @headers.each do |header| %>
+      <% @table_headers.each do |header| %>
         <th>
           <a 
-            href="<%= sort_by_link(header[:sort_key]) %>"
+            href="<%= get_sort_by_link(header[:sort_key]) %>"
             class="<%= @sorted_by == header[:sort_key] ? 'selected-header' : '' %>">
             <%= header[:name] %>
           </a>
