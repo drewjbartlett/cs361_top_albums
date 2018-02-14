@@ -3,11 +3,18 @@ require 'csv'
 class AlbumApp
 
   def call(env)
+    request = Rack::Request.new(env)
+    
     response_body = "<h1>Top 100 Albums of All Time</h1>"
     # Read the data from the file.
 
     table_data = load_from_file
-    #table_data = sort_data_by_key("title", table_data)
+
+    if (request.params.has_key?('sort_by'))
+      puts "sorting"
+      table_data = sort_data_by_key(request.params['sort_by'], table_data)
+    end
+
     response_body << render_data_to_table(table_data)
 
     # Send the response
@@ -30,8 +37,8 @@ class AlbumApp
 
     response_body << "<table>"
       response_body << "<thead><tr>"
-        response_body << '<th><a href="?sort_by=rank">Rank</a></th>'        
-        response_body << '<th><a href="?sort_by=name">Name</a></th>'        
+        response_body << '<th><a href="?sort_by=number">Rank</a></th>'        
+        response_body << '<th><a href="?sort_by=title">Name</a></th>'        
         response_body << '<th><a href="?sort_by=year">Year</a></th>'            
       response_body << "</tr></thead>"
       response_body << "<tbody>"
@@ -44,10 +51,11 @@ class AlbumApp
   end
 
   def sort_data_by_key(sort_key, data)
-    data.sort_by { |row| row[sort_key.to_sym] }
-
+    data.sort_by {|row| 
+      row = row[sort_key.to_sym]
+      # strip quotes from the row if it's not the number key
+      sort_key != 'number' ? row.gsub("'", '') : row
+    }
   end
-
-
 
 end
