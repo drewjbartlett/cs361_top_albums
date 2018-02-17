@@ -20,11 +20,9 @@ class AlbumApp
     response_body << render_data_to_table(table_data)
     album_controller = Controller.new(request)
     # Send the response
-    album_controller.response(200, response_body)
+    album_controller.response(200, album_controller.render_erb_file('app/views/album.html.erb'))
 
   end
-
- 
 
   def render_data_to_table(table_data)
  
