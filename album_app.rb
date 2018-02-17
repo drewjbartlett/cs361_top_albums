@@ -1,4 +1,6 @@
 require 'csv'
+require_relative 'app/models/model'
+require_relative 'app/controllers/controller'
 
 class AlbumApp
 
@@ -7,29 +9,21 @@ class AlbumApp
     
     response_body = "<h1>Top 100 Albums of All Time</h1>"
     # Read the data from the file.
-
-    table_data = load_from_file
+    album_model = Model.new("top_100_albums.txt")
+    table_data = album_model.load_from_file
 
     if (request.params.has_key?('sort_by'))
       puts "sorting"
-      table_data = sort_data_by_key(request.params['sort_by'], table_data)
+      table_data = album_model.sort_data_by_key(request.params['sort_by'], table_data)
     end
 
     response_body << render_data_to_table(table_data)
-
+    album_controller = Controller.new(request)
     # Send the response
-    [200, {'Content-Type' => 'text/html'}, [response_body.to_s]]
+    album_controller.response(200, response_body)
   end
 
-  def load_from_file
-  	albums = []
-
-  	CSV.foreach("top_100_albums.txt") do |row|
-  		albums.push({ number: $., title: row[0], year: row[1] })
-	   end
-
-	   albums
-  end
+ 
 
   def render_data_to_table(table_data)
  
@@ -48,14 +42,6 @@ class AlbumApp
 
     response_body
 
-  end
-
-  def sort_data_by_key(sort_key, data)
-    data.sort_by {|row| 
-      row = row[sort_key.to_sym]
-      # strip quotes from the row if it's not the number key
-      sort_key != 'number' ? row.gsub("'", '') : row
-    }
   end
 
 end
