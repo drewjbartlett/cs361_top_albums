@@ -1,26 +1,14 @@
 require 'csv'
 require_relative 'app/models/model'
-require_relative 'app/controllers/controller'
+require_relative 'app/controllers/album_controller'
 
 class AlbumApp
 
   def call(env)
-    request = Rack::Request.new(env)
-    
-    response_body = "<h1>Top 100 Albums of All Time</h1>"
-    # Read the data from the file.
-    album_model = Model.new("top_100_albums.txt")
-    table_data = album_model.load_from_file
-
-    if (request.params.has_key?('sort_by'))
-      puts "sorting"
-      table_data = album_model.sort_data_by_key(request.params['sort_by'], table_data)
-    end
-
-    response_body << render_data_to_table(table_data)
-    album_controller = Controller.new(request)
+  
+    album_controller = AlbumController.new(Rack::Request.new(env))
     # Send the response
-    album_controller.response(200, album_controller.render_erb_file('app/views/album.html.erb'))
+    album_controller.view_albums
 
   end
 
