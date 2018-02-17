@@ -21,6 +21,7 @@ class AlbumApp
     album_controller = Controller.new(request)
     # Send the response
     album_controller.response(200, response_body)
+
   end
 
  
