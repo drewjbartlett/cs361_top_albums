@@ -103,6 +103,7 @@
             name="highlighted_index"
             maxlength="3"
             type="text"
+            value="<%= @highlighted_index == 0 ? '' : @highlighted_index %>"
             >
 
           <button class="button" type="submit">Highlight</button>
@@ -120,7 +121,7 @@
       </thead>
       <tbody>
       <% @table_data.each do |row| %>
-        <tr class="">
+        <tr class="<%= @highlighted_index == row[:number].to_i ? 'highlighted-row' : '' %>">
           <td><%= row[:number] %></td>
           <td><%= row[:title] %></td>
           <td><%= row[:year] %></td>
