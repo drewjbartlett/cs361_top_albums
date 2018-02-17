@@ -16,9 +16,10 @@ class AlbumApp
     end
 
     response_body << render_data_to_table(table_data)
+    response_body = render_erb_file('app/views/album.html.erb')
 
     # Send the response
-    [200, {'Content-Type' => 'text/html'}, [response_body.to_s]]
+    [200, {'Content-Type' => 'text/html'}, [response_body]]
   end
 
   def load_from_file
