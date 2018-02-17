@@ -94,8 +94,40 @@
 
   <div class="album-app">
     <div class="album-filters">
-      <h1>Top 100 Albums of All Time</h1>
+      <h1>Top 100 Albums of All Time</h1> 
+
+      <form method="GET">
+        <div class="input-group">
+          <input
+            class="input"
+            name="highlighted_index"
+            maxlength="3"
+            type="text"
+            >
+
+          <button class="button" type="submit">Highlight</button>
+        </div>
+      </form>
     </div>
+
+    <table class="album-list">
+      <thead>
+        <tr>
+          <th><a href="?sort_by=number">Rank</a></th>        
+          <th><a href="?sort_by=title">Name</a></th>        
+          <th><a href="?sort_by=year">Year</a></th>   
+        </tr>
+      </thead>
+      <tbody>
+      <% @table_data.each do |row| %>
+        <tr class="">
+          <td><%= row[:number] %></td>
+          <td><%= row[:title] %></td>
+          <td><%= row[:year] %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
   </div>
 
 </body>
