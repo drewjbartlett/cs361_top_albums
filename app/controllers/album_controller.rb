@@ -11,7 +11,7 @@ class AlbumController < BaseController
     	if (@request.params.has_key?('sort_by'))
       	@table_data = album_model.sort_data_by_key(@request.params['sort_by'], @table_data)
     	end
-
+    	@highlighted_index = (@request.params.has_key?('highlighted_index') ? @request.params['highlighted_index'] : nil).to_i
 	    response(200, render_erb_file('app/views/album.html.erb'))
 	end
 
