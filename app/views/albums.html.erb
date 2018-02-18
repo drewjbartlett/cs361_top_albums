@@ -5,6 +5,13 @@
     <h1>Top 100 Albums of All Time</h1>
 
     <form method="GET">
+      <% if (@sorted_by) %>
+        <input
+          name="sort_by"
+          type="hidden"
+          value="<%= @sorted_by %>">  
+      <% end %>
+      
       <div class="input-group">
         <input
           class="input"
