@@ -1,3 +1,7 @@
+require_relative 'app/utils/router'
 require_relative 'album_app'
 
-run AlbumApp.new
+router = Router.new
+router.register('/albums', 'Album@index')
+
+run AlbumApp.new(router)

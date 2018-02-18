@@ -4,12 +4,12 @@ require_relative 'app/controllers/album_controller'
 
 class AlbumApp
 
-  def call(env)
-  
-    album_controller = AlbumController.new(Rack::Request.new(env))
-    # Send the response
-    album_controller.view_albums
+  def initialize(router)
+    @router = router
+  end
 
+  def call(env)
+    @router.dispatch(Rack::Request.new(env))
   end
 
 end
