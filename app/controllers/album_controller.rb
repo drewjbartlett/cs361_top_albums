@@ -26,7 +26,7 @@ class AlbumController < BaseController
     @sorted_by = (@request.params.has_key?('sort_by') ? @request.params['sort_by'] : nil)
 
     # render the template
-    self.render('albums')
+    self.render_view('albums')
   end
 
   def get_sort_by_link(sort_key)

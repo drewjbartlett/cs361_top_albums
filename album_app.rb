@@ -1,7 +1,3 @@
-require 'csv'
-require_relative 'app/models/model'
-require_relative 'app/controllers/album_controller'
-
 class AlbumApp
 
   def initialize(router)

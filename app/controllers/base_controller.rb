@@ -8,14 +8,13 @@ class  BaseController
     @request = request
   end
 
-  def render(file_name, response_code = 200)
-    file_path = views_path(get_full_filename(file_name))
+  def get_full_filename(file_name)
+    "#{file_name}.html.erb"
+  end
 
-    if File.exists?(file_path)
-      response(response_code, render_erb_file(file_path))
-    else
-      response(404, "#{file_path} not found")
-    end
+  def render_erb_file(file_path)
+    raw = File.read(file_path)
+    ERB.new(raw).result(binding)
   end
 
   def render_partial(file_name)
@@ -24,13 +23,14 @@ class  BaseController
     render_erb_file(file_path)
   end
 
-  def render_erb_file(file_path)
-    raw = File.read(file_path)
-    ERB.new(raw).result(binding)
-  end
+  def render_view(file_name, response_code = 200)
+    file_path = views_path(get_full_filename(file_name))
 
-  def get_full_filename(file_name)
-    "#{file_name}.html.erb"
+    if File.exists?(file_path)
+      response(response_code, render_erb_file(file_path))
+    else
+      response(404, "#{file_path} not found")
+    end
   end
 
   def response(code, output) 
