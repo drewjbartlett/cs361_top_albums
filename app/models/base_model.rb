@@ -18,7 +18,7 @@ class BaseModel
     data
   end
 
-  def sort_data_by(sort_key, data)
+  def sort_data_by_key(sort_key, data)
     valid_sort_keys = ['name', 'number', 'year']
 
     if (valid_sort_keys.include?(sort_key))

@@ -11,7 +11,7 @@ class AlbumController < BaseController
 
     # sort the data if we have a valid sort key
     if (@request.params.has_key?('sort_by'))
-      @albums = album_model.sort_data_by(@request.params['sort_by'], @albums)
+      @albums = album_model.sort_data_by_key(@request.params['sort_by'], @albums)
     end
 
     # set the table headers
