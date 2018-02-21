@@ -1,11 +1,5 @@
-class AlbumApp
+require 'sinatra'
 
-  def initialize(router)
-    @router = router
-  end
-
-  def call(env)
-    @router.dispatch(Rack::Request.new(env))
-  end
-
+get '/albums' do
+  'Hello world!'
 end
