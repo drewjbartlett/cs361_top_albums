@@ -1,26 +1,54 @@
-<!DOCTYPE html>
-<html>
+<%= erb :'partials/head' %>
 
-<head>
-    <title>Top Albums</title>
-    <style type="text/css">
-    	.highlighted{
-    		background: YELLOW;
-    	}
-    </style>
-</head>
+<div class="album-app">
+  <div class="album-filters">
+    <h1>Top 100 Albums of All Time</h1>
 
-<body>
-    <h1>Top 100 Albums of all Time</h1>
-    <form >
-    	<input type="text" name="index">
-    	<input type="submit">
+    <form method="GET">
+      <% if (@sorted_by) %>
+        <input
+          name="sort_by"
+          type="hidden"
+          value="<%= @sorted_by %>">  
+      <% end %>
+      
+      <div class="input-group">
+        <input
+          class="input"
+          name="highlighted_index"
+          maxlength="3"
+          type="text"
+          value="<%= @highlighted_index == 0 ? '' : @highlighted_index %>">
+
+        <button class="button" type="submit">Highlight</button>
+      </div>
     </form>
-    <a href="?sort_key=number" >Number</a> <a href="?sort_key=name">Name</a> <a href="?sort_key=year">Year</a>
-    <% @album_collection.albums.each do |album|%>
-    <p><%= album.rank %> <%= album.title %><%= album.year %> </p>
-    <% end %>
-</body>
-</html>
+  </div>
+  
+  <table class="album-list">
+    <thead>
+      <tr>
+      <% @table_headers.each do |header| %>
+        <th>
+          <a 
+            href="<%= "?sort_by=#{header[:sort_key]}" + (@highlighted_index != 0 ? "&highlighted_index=#{@highlighted_index}" : '') %>"
+            class="<%= @sorted_by == header[:sort_key] ? 'selected-header' : '' %>">
+            <%= header[:name] %>
+          </a>
+        </th>
+      <% end %>
+      </tr>
+    </thead>
+    <tbody>
+      <% @album_collection.albums.each do |album| %>
+        <tr class="<%= @highlighted_index == album.rank.to_i ? 'highlighted-row' : '' %>">
+          <td><%= album.rank %></td>
+          <td><%= album.title %></td>
+          <td><%= album.year %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
-
+<%= erb :'partials/foot' %>

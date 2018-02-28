@@ -1,7 +1,6 @@
 require_relative '../utils/album_loader'
 
 class AlbumCollection
-
   attr_accessor :albums
 
   def initialize(file_name)
@@ -9,16 +8,16 @@ class AlbumCollection
   end
 
   def sort_by_key(sort_key)
-    valid_sort_keys = ['name', 'number', 'year']
+    valid_sort_keys = ['title', 'rank', 'year']
 
     if (valid_sort_keys.include?(sort_key))
-      @albums.sort_by {|row| 
-        row = row[sort_key.to_sym]
-        # strip quotes from the row if it's not the number key
-        sort_key != 'number' ? row.gsub("'", '') : row
+      @albums.sort_by! {|album| 
+        album_key = album.send(sort_key.to_sym)
+
+        # strip quotes from the album if it's not the number key
+        sort_key == 'title' ? album_key.gsub("'", '') : album_key
       }
-    else
-      @albums
     end
   end
+  
 end

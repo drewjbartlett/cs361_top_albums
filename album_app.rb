@@ -1,37 +1,23 @@
+require 'erb'
 require 'sinatra'
 require_relative 'app/collections/album_collection'
-#require_relative 'app/controllers/album_controller'
-require 'erb'
-
 
 set :views, Proc.new {File.join(root, 'app/views')}
 
-get '/' do
-  @album_collection = AlbumCollection.new('top_100_albums.txt')
-  #@album_collection.sort_data_by_key(@request.params['sort_by'], @albums)
-  erb :index
-end
+get '/albums' do
+  # set some helper variables for the query params
+  @highlighted_index = (params.has_key?('highlighted_index') ? params[:highlighted_index] : nil).to_i
+  @sorted_by = (params.has_key?('sort_by') ? params[:sort_by] : nil)
 
-get '/rank' do
   @album_collection = AlbumCollection.new('top_100_albums.txt')
-  #@albums = album_collection.sort_data_by_key(@request.params['sort_by'], @albums)
-  erb :index
-end
+  @album_collection.sort_by_key(@sorted_by)
 
-get '/title' do
-  @album_collection = AlbumCollection.new('top_100_albums.txt')
- # @albums = album_collection.sort_data_by_key(@request.params['sort_by'], @albums)
-  erb :index
-end
+  # set the table headers
+  @table_headers = [
+    { sort_key: 'rank', name: '#' },
+    { sort_key: 'title', name: 'Title' },
+    { sort_key: 'year', name: 'Year' },
+  ]
 
-get '/year' do
-  @album_collection = AlbumCollection.new('top_100_albums.txt')
- # @albums = album_collection.sort_data_by_key(@request.params['sort_by'], @albums)
-  erb :index
-end
-
-post '/highlight' do
-  @album_collection = AlbumCollection.new('top_100_albums.txt')
-  #@albums = album_collection.sort_data_by_key(@request.params['sort_by'], @albums)
   erb :index
 end
