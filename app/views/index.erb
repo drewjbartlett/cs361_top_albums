@@ -1,4 +1,26 @@
+<!DOCTYPE html>
+<html>
 
-<% @album_collection.albums.each do |album| %>
-<p><%= album.rank %> <%= album.title %><%= album.year %></p>
-<% end %>
+<head>
+    <title>Top Albums</title>
+    <style type="text/css">
+    	.highlighted{
+    		background: YELLOW;
+    	}
+    </style>
+</head>
+
+<body>
+    <h1>Top 100 Albums of all Time</h1>
+    <form >
+    	<input type="text" name="index">
+    	<input type="submit">
+    </form>
+    <a href="?sort_key=number" >Number</a> <a href="?sort_key=title">Title</a> <a href="?sort_key=year">Year</a>
+    <% @album_collection.albums.each do |album|%>
+    <p><%= album.rank %> <%= album.title %><%= album.year %> </p>
+    <% end %>
+</body>
+</html>
+
+
