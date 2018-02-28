@@ -16,7 +16,7 @@
     	<input type="text" name="index">
     	<input type="submit">
     </form>
-    <a href="?sort_key=number" >Number</a> <a href="?sort_key=title">Title</a> <a href="?sort_key=year">Year</a>
+    <a href="?sort_key=number" >Number</a> <a href="?sort_key=name">Name</a> <a href="?sort_key=year">Year</a>
     <% @album_collection.albums.each do |album|%>
     <p><%= album.rank %> <%= album.title %><%= album.year %> </p>
     <% end %>
